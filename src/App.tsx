@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <PlayerProvider>
-      <div className="h-screen bg-gray-800 flex flex-col items-center justify-center text-white">
+      <div className="h-screen bg-slate-700 flex flex-col items-center justify-center text-white">
         {/* Pass hasPrompted as a prop to Prompt */}
         <Prompt hasPrompted={hasPrompted} />
         

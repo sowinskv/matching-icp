@@ -82,13 +82,13 @@ export default function SidePanelsPage() {
                                 </ul>
                             </Block>
                             <div className='flex justify-around px-8 pb-7 bg-slate-800'>
-                                <a href="https://x.com/MatchingTapp" target="_blank">
+                                <a href="https://www.google.com/" target="_blank">
                                     <img src="/social/twitter.png" alt="Twitter" width="30" height="30" />
                                 </a>
-                                <a href="https://www.instagram.com/MatchingTapp" target="_blank" className="text-white text-2xl hover:text-pink-500 transition-colors">
+                                <a href="https://www.google.com/" target="_blank" className="text-white text-2xl hover:text-pink-500 transition-colors">
                                     <img src="/social/instagram.png" alt="Instagram" width="30" height="30" />
                                 </a>
-                                <a href="https://t.me/matchingannoucement" target="_blank" className="text-white text-2xl hover:text-pink-400 transition-colors">
+                                <a href="https://www.google.com/" target="_blank" className="text-white text-2xl hover:text-pink-400 transition-colors">
                                     <img src="/social/telegram.png" alt="Telegram" width="30" height="30" />
                                 </a>
                             </div>

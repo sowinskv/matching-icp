@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { PlayerContext } from '../context/PlayerContext';
-import axios from 'axios';
+//import axios from 'axios';
 
 
 interface PromptProps {
@@ -12,7 +12,7 @@ const Prompt: React.FC<PromptProps> = ({ hasPrompted }) => {
     // const user = Telegram.WebApp.getMe();
 
     useEffect(() => {
-        const fetchOrCreatePlayer = async (walletAddress: string) => {
+        /*const fetchOrCreatePlayer = async (walletAddress: string) => {
             try {
                 const response = await axios.post('/api/player', { walletAddress });
                 if (response.data && response.data.telegramUserName) {
@@ -24,7 +24,7 @@ const Prompt: React.FC<PromptProps> = ({ hasPrompted }) => {
                 console.error('Error fetching or creating player:', error);
                 setPlayerName('Guest');
             }
-        };
+        };*/
 
         if (!hasPrompted.current) {
             setPlayerName('Guest');

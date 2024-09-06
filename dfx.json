@@ -5,8 +5,7 @@
                 "entrypoint": "index.html"
             },
             "source": [
-                "",
-                "src"
+                "docs"
             ],
             "type": "assets"
         }
