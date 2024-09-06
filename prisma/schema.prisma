@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Score {
+  id         Int      @id @default(autoincrement())
+  highScore  Int
+  totalScore Int
+  playerId   String   @unique @map("wallet_address")  // Each score is linked to a player by their unique wallet address
+  Player     Player   @relation(fields: [playerId], references: [walletAddress])
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Player {
+  id                Int      @id @default(autoincrement())
+  telegramHandle    String   @unique
+  walletAddress     String   @unique
+  gamePoints        Int
+  bestScore         Int
+  cumulativePoints  Int
+  teamId            Int?
+  referralCode      String   @unique  // Unique referral code for each player
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  scores            Score[]  @relation
+  referralsGiven    Referral[] @relation("ReferralsGiven")
+  referralsReceived Referral[] @relation("ReferralsReceived")
+
+  @@map("table_players")
+}
+
+model Referral {
+  id                   Int      @id @default(autoincrement())
+  giverWalletAddress   String   // Wallet address of the player giving the referral
+  receiverWalletAddress String  // Wallet address of the player receiving the referral
+  referralPoints       Int
+
+  giver                Player   @relation("ReferralsGiven", fields: [giverWalletAddress], references: [walletAddress])
+  receiver             Player   @relation("ReferralsReceived", fields: [receiverWalletAddress], references: [walletAddress], onDelete: Cascade)
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@map("referrals")
+}
+
+
+
+// model Referral {
+//   id                   Int     @id @default(autoincrement())
+//   giverWalletAddress   String
+//   receiverWalletAddress String
+//   referralPoints       Int
+
+//   giver                Player  @relation("ReferralsGiven", fields: [giverWalletAddress], references: [walletAddress])
+//   receiver             Player  @relation("ReferralsReceived", fields: [receiverWalletAddress], references: [walletAddress], onDelete: Cascade)
+
+//   createdAt            DateTime @default(now())
+//   updatedAt            DateTime @updatedAt
+
+//   @@map("referrals")
+// }
+
+// model Team {
+//   id                   Int      @id @default(autoincrement())
+//   name                 String
+//   // season               Season?  @relation(fields: [seasonId], references: [id])
+//   seasonId             Int?
+//   numberOfMatches      Int
+//   numberOfWins         Int // elo rating or clashOfClans 
+//   numberOfLosses       Int // elo rating or clashOfClans 
+//   numberOfDraws        Int  
+//   numberOfPoints       Int   
+//   players              Player[] @relation("TeamPlayers", onDelete: Cascade)
+//   resetAt              DateTime?
+
+//   createdAt            DateTime @default(now())
+//   updatedAt            DateTime @updatedAt
+
+//   @@map("teams")
+// }
+
+// model Season {
+//   id          Int      @id @default(autoincrement())
+//   start       DateTime
+//   end         DateTime
+//   teams       Team[]   @relation("TeamsInSeason")
+
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   @@map("seasons")
+// }
