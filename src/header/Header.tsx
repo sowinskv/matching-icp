@@ -3,7 +3,7 @@ import PlugConnect from '@psychedelic/plug-connect';
 
 export const Header = () => {
     return (
-        <header className="bg-slate-800 flex items-center p-2 fixed w-full top-0 justify-between">
+        <header className="bg-slate-800 bg-opacity-0 flex items-center p-2 fixed w-full top-0 justify-between">
             <SidePanelsPage />
             <PlugConnect
             dark
